@@ -3,7 +3,6 @@ package com.ananananzhuo.stateflowdemo.multiplestate
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 
 /**
  * author  :mayong
@@ -14,8 +13,8 @@ class MultipleViewModel : ViewModel() {
     private val state1 = MutableStateFlow<String>("哈哈哈1")
     private val state2 = MutableStateFlow<String>("哈哈哈哈2")
     private var count = 0
-    val state11 = state1.asStateFlow()
-    val state22 = state2.asStateFlow()
+    val state11: StateFlow<String> = state1
+    val state22: StateFlow<String> = state2
 
 
     fun sendData1() {
