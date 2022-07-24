@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -11,25 +10,29 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:padding="16dp"
         tools:context=".mediator.StateFlowMediatorActivity">
 
         <Button
             android:id="@+id/btn_mediator1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:text="flow1数量增加" />
 
         <Button
             android:id="@+id/btn_mediator2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:text="flow2数量增加" />
 
         <TextView
             android:id="@+id/tv_mediator"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:textColor="#f00" />
+            android:layout_marginTop="16dp"
+            android:textColor="#f00"
+            android:textSize="20sp" />
     </LinearLayout>
 </layout>

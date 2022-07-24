@@ -1,49 +1,56 @@
 package com.ananananzhuo.stateflowdemo.multiplestate
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
-import android.widget.TextView
 import androidx.activity.viewModels
-import androidx.lifecycle.ViewModelProvider
+import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
 import com.ananananzhuo.stateflowdemo.R
+import com.ananananzhuo.stateflowdemo.databinding.ActivityMultipleStateFlowBinding
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-fun logEE(msg:String){
-    Log.e("安安安安卓",msg)
+
+fun logEE(msg: String) {
+    Log.e("安安安安卓", msg)
 }
 
 /**
  * 同一个activity中注册两个StateFlow只有一个能回调
  */
 class MultipleStateFlowActivity : AppCompatActivity() {
-    val multipleViewModel by viewModels<MultipleViewModel> {
-        ViewModelProvider.NewInstanceFactory()
-    }
-    var count =0
+
+    private val multipleViewModel: MultipleViewModel by viewModels()
+
+    private lateinit var binding: ActivityMultipleStateFlowBinding
+
+    var count = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_multiple_state_flow)
-        val tv = findViewById<TextView>(R.id.tv_beupdate)
+
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_multiple_state_flow)
+
         lifecycleScope.launch {
             multipleViewModel.state11.collect {
                 logEE(it)
                 count++
-                tv.text="收到StateFlow1数据更新 $count 次"
+                binding.tvBeupdate.text = "收到StateFlow1数据更新 $count 次"
             }
             multipleViewModel.state22.collect {
                 logEE(it)
                 count++
-                tv.text="收到StateFlow2数据更新 $count 次"
+                binding.tvBeupdate.text = "收到StateFlow2数据更新 $count 次"
             }
         }
-        findViewById<Button>(R.id.btn_state1_senddata).setOnClickListener {
+
+        binding.btnState1Senddata.setOnClickListener {
             multipleViewModel.sendData1()
         }
-        findViewById<Button>(R.id.btn_state2_senddata).setOnClickListener {
+
+        binding.btnState2Senddata.setOnClickListener {
             multipleViewModel.sendData2()
         }
+
     }
 }
