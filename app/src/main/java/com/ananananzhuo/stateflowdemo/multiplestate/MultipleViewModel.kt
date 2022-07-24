@@ -11,24 +11,24 @@ import kotlinx.coroutines.flow.asStateFlow
  **/
 class MultipleViewModel : ViewModel() {
 
-    private val _state11 = MutableStateFlow<String>("哈哈哈1")
+    private val _state1 = MutableStateFlow<String>("哈哈哈1")
 
-    val state11 = _state11.asStateFlow()
+    val state1 = _state1.asStateFlow()
 
-    private val _state22 = MutableStateFlow<String>("哈哈哈哈2")
+    private val _state2 = MutableStateFlow<String>("哈哈哈哈2")
 
-    val state22 = _state22.asStateFlow()
+    val state2 = _state2.asStateFlow()
 
     private var count = 0
 
     fun sendData1() {
         count++
-        _state11.value = "state1被更改 $count"
+        _state1.value = "state1被更改 $count"
     }
 
     fun sendData2() {
         count++
-        _state22.value = "state2被更改 $count"
+        _state2.value = "state2被更改 $count"
     }
 
 }

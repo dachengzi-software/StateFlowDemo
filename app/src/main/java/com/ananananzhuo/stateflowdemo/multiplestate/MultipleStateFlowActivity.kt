@@ -32,12 +32,14 @@ class MultipleStateFlowActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_multiple_state_flow)
 
         lifecycleScope.launch {
-            multipleViewModel.state11.collect {
+            multipleViewModel.state1.collect {
                 logEE(it)
                 count++
                 binding.tvBeupdate.text = "收到StateFlow1数据更新 $count 次"
             }
-            multipleViewModel.state22.collect {
+        }
+        lifecycleScope.launch {
+            multipleViewModel.state2.collect {
                 logEE(it)
                 count++
                 binding.tvBeupdate.text = "收到StateFlow2数据更新 $count 次"
