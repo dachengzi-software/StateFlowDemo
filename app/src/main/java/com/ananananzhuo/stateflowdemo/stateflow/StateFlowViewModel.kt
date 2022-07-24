@@ -2,7 +2,7 @@ package com.ananananzhuo.stateflowdemo.stateflow
 
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 
 /**
  * author  :mayong
@@ -13,7 +13,7 @@ class StateFlowViewModel : ViewModel() {
 
     private val _stateFlow = MutableStateFlow("安安安安卓")
 
-    val stateFlow: StateFlow<String> = _stateFlow
+    val stateFlow = _stateFlow.asStateFlow()
 
     fun changeData(data: String) {
         _stateFlow.value = data
