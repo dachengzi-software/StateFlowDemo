@@ -1,36 +1,39 @@
 package com.ananananzhuo.stateflowdemo.mediator
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.TextView
 import androidx.activity.viewModels
-import androidx.lifecycle.ViewModelProvider
+import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
 import com.ananananzhuo.stateflowdemo.R
+import com.ananananzhuo.stateflowdemo.databinding.ActivityStateFlowMediatorBinding
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class StateFlowMediatorActivity : AppCompatActivity() {
-    val model: StateFlowMediatorViewModel by viewModels<StateFlowMediatorViewModel> {
-        ViewModelProvider.NewInstanceFactory()
-    }
-    var textView: TextView? = null
+
+    private val viewModel: StateFlowMediatorViewModel by viewModels()
+
+    private lateinit var binding: ActivityStateFlowMediatorBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_state_flow_mediator)
-        textView = findViewById<TextView>(R.id.tv_mediator)
-        findViewById<Button>(R.id.btn_mediator1).setOnClickListener {
-            model.flow1pp()
+
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_state_flow_mediator)
+
+        binding.btnMediator1.setOnClickListener {
+            viewModel.flow1pp()
         }
-        findViewById<Button>(R.id.btn_mediator2).setOnClickListener {
-            model.flow2pp()
+
+        binding.btnMediator2.setOnClickListener {
+            viewModel.flow2pp()
         }
 
         lifecycleScope.launch {
-            model.flow.collect {
-                textView?.text = if (it > 10) "亲爱的安安安安卓同学您已经点击了$it 次了，再点也不和你玩了" else "您已经点击了$it 次"
+            viewModel.flow.collect {
+                binding.tvMediator.text = if (it > 10) "亲爱的安安安安卓同学您已经点击了$it 次了，再点也不和你玩了" else "您已经点击了$it 次"
             }
         }
+
     }
 }

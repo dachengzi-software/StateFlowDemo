@@ -10,10 +10,13 @@ import kotlinx.coroutines.flow.StateFlow
  * date    :2021/6/28
  **/
 class StateFlowViewModel : ViewModel() {
-    private val mutableStateFlow = MutableStateFlow("安安安安卓")
-    val stateFlow: StateFlow<String> = mutableStateFlow
+
+    private val _stateFlow = MutableStateFlow("安安安安卓")
+
+    val stateFlow: StateFlow<String> = _stateFlow
 
     fun changeData(data: String) {
-        mutableStateFlow.value = data
+        _stateFlow.value = data
     }
+
 }
